@@ -1,0 +1,109 @@
+    <div id="overlay" class="overlay hidden">
+        <div class="popup">
+            <h3>Advanced Search</h3>
+
+            <div class="form-group">
+                <label>From:</label>
+                <input type="text" placeholder="Sender email">
+            </div>
+
+            <div class="form-group">
+                <label>To:</label>
+                <input type="text" placeholder="Receiver email">
+            </div>
+
+            <div class="form-group">
+                <label>Subject:</label>
+                <input type="text" placeholder="Subject line">
+            </div>
+
+            <div class="form-group">
+                <label>Has the words:</label>
+                <input type="text" placeholder="Keywords">
+            </div>
+
+            <div class="form-group">
+                <label>Doesn't have:</label>
+                <input type="text" placeholder="Exclude keywords">
+            </div>
+
+            <!-- Size Filter -->
+            <div class="form-group">
+                <label>Size Filter:</label>
+                <select>
+                    <option value="">Any</option>
+                    <option value="greater">Greater than</option>
+                    <option value="less">Less than</option>
+                </select>
+                <input type="number" placeholder="Size">
+                <select>
+                    <option value="KB">KB</option>
+                    <option value="MB">MB</option>
+                    <option value="GB">GB</option>
+                </select>
+            </div>
+
+            <!-- Date Range -->
+            <div class="form-group">
+                <label>Date Range:</label>
+                <input type="date"> to <input type="date">
+            </div>
+
+            <!-- Time Period -->
+            <div class="form-group">
+                <label>Specific Time Period:</label>
+                <select>
+                    <option value="">Select</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="pastday">Past Day</option>
+                    <option value="pastweek">Past Week</option>
+                    <option value="pastmonth">Past Month</option>
+                    <option value="pastyear">Past Year</option>
+                </select>
+            </div>
+
+            <!-- Attachment with File Type -->
+            <div class="form-group">
+                <label>Has Attachment (Type):</label>
+                <select>
+                    <option value="">Any</option>
+                    <option value="pdf">PDF</option>
+                    <option value="docx">DOCX</option>
+                    <option value="xlsx">XLSX</option>
+                    <option value="image">Image Files</option>
+                    <option value="video">Video Files</option>
+                    <option value="audio">Audio Files</option>
+                </select>
+            </div>
+
+            <div class="popup-actions">
+                <button id="searchNow">Search</button>
+                <button id="closePopup">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+.popup-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+
+.form-group {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input,
+.form-group select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    // above is simplysearch
+    margin: 5px 0;
+
+}
+

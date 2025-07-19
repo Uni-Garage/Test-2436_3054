@@ -1,0 +1,63 @@
+    <div id="overlay" class="overlay hidden">
+        <div class="popup">
+            <h3>Advanced Search</h3>
+            <div class="form-group">
+                <label>From:</label>
+                <input type="text" placeholder="Sender email">
+            </div>
+            <div class="form-group">
+                <label>To:</label>
+                <input type="text" placeholder="Receiver email">
+            </div>
+            <div class="form-group">
+                <label>Subject:</label>
+                <input type="text" placeholder="Subject line">
+            </div>
+            <div class="form-group">
+                <label>Has the words:</label>
+                <input type="text" placeholder="Keywords">
+            </div>
+            <div class="form-group">
+                <label>Doesn't have:</label>
+                <input type="text" placeholder="Exclude keywords">
+            </div>
+            <div class="form-group">
+                <label>Attachment:</label>
+                <select>
+                    <option value="">Any</option>
+                    <option value="yes">Has Attachment</option>
+                    <option value="no">No Attachment</option>
+                </select>
+            </div>
+            <div class="popup-actions">
+                <button id="searchNow">Search</button>
+                <button id="closePopup">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    .popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;   
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}

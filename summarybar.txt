@@ -1,0 +1,86 @@
+<script>
+    const advBtn = document.getElementById('advSearchBtn');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closePopup');
+    const searchNow = document.getElementById('searchNow');
+    const searchSummaryBar = document.getElementById('searchSummaryBar');
+    const summaryText = document.getElementById('summaryText');
+    const clearSummary = document.getElementById('clearSummary');
+
+    advBtn.addEventListener('click', () => {
+        overlay.classList.remove('hidden');
+        document.body.classList.add('blurred');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+        document.body.classList.remove('blurred');
+    });
+    //blur script ends
+
+    searchNow.addEventListener('click', () => {
+        const inputs = overlay.querySelectorAll('input, select');
+        let summary = [];
+        inputs.forEach(input => {
+            if (input.value.trim() !== '') {
+                const label = input.parentElement.querySelector('label').innerText;
+                summary.push(`${label} <strong>${input.value}</strong>`);
+            }
+        });
+
+        if (summary.length > 0) {
+            summaryText.innerHTML = summary.join(' | ');
+            searchSummaryBar.classList.remove('hidden');
+        } else {
+            searchSummaryBar.classList.add('hidden');
+        }
+
+        overlay.classList.add('hidden');
+        document.body.classList.remove('blurred');
+    });
+
+    clearSummary.addEventListener('click', () => {
+        searchSummaryBar.classList.add('hidden');
+    });
+</script>
+
+
+
+    <div id="searchSummaryBar" class="search-summary hidden">
+        <span id="summaryText"></span>
+        <button id="clearSummary">Clear</button>
+    </div>
+
+
+
+
+
+// summary tab
+
+.search-summary {
+    background-color: #e8f0fe;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    animation: fadeIn 0.3s ease;
+}
+
+.search-summary span {
+    font-size: 14px;
+    color: #333;
+}
+
+.search-summary button {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-summary button:hover {
+    background: #d32f2f;
+}
