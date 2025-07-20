@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: -webkit-fill-available;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +20,84 @@
         </div>
     </header>
 
-    <div id="contentArea">
-    <main class="main-content">
-        <p>Welcome to your mailbox!</p>
-    </main>
+    <div id="contentArea" class="content-area">
+        <div class="sidebar">
+            <aside class=" collapsed">
+                <div class="toggle-btn" id="toggleSidebar">&#9776;</div>
+                <div class="sidebar-item" title="Inbox">
+                    <span class="icon">📥</span>
+                    
+                    <div class="sidebar-action" onclick="loadContent('Inbox')">
+                        <span class="label">Inbox</span>
+                    </div>
+                </div>
+                <div class="sidebar-item" title="Sent">
+                    <span class="icon">📤</span>
+                    <div class="sidebar-action" onclick="loadContent('Sent')">
+                    <span class="label">Sent</span>
+                    </div>
+                </div>
+                <div class="sidebar-item" title="Drafts">
+                    <span class="icon">📝</span>
+                    <div class="sidebar-action" onclick="loadContent('Drafts')">
+                    <span class="label" >Drafts</span>
+                    </div>
+                </div>
+                <div class="sidebar-item" title="Spam">
+                    <span class="icon">🚫</span>
+                    <div class="sidebar-action" onclick="loadContent('Spam')">
+                    <span class="label">Spam</span>
+                    </div>
+                </div>
+                <div class="sidebar-item" title="Trash">
+                    <span class="icon">🗑️</span>
+                    <div class="sidebar-action" onclick="loadContent('Trash')">                    
+                    <span class="label">Trash</span>
+                    </div>
+                </div>
+                <div class="sidebar-item" title="Settings">
+                    <span class="icon">⚙️</span>
+                    <div class="sidebar-action" onclick="loadContent('Settings')">
+                    <span class="label" >Settings</span>
+                    </div>
+                    </button>
+                </div>
+            </aside>
+        </div>
+        <div class="mainC" id="mainContent">
+            <div id="panelContent" class="main-content" style="display: none;">
+                <button class="close-content-btn" onclick="closeContent()">×</button>
+                <div id="panelInnerContent"></div>
+            </div>
+            <!-- double click  for example view and apply after getting actual data -->
+            <div id="searchResults" class="mail-results">
+                <!-- Example static mail item -->
+                <!-- div class="mail-item">         ######## this class imp to implement double click
+                    Sample Mail Subject - Click to view</div -->
+                <!--div class="mail-item">Another Sample Mail Subjectoooooooooooooooooooooooooooooooooooooooooo</div-->
+                <!-- Dynamically generate these later with Flask -->
+
+<div class="mail-item">Another Sample Mail Subjectoooooooooooooooooooooooooooooooooooooooooo</div>
+                 
+                <!-- frts option   -->                         
+                <div id="searchResults" class="mail-results">
+                    <div class="loading">
+                        <p>Loading mails...</p>
+                    </div>
+                </div>
+                <!--- second option -->
+                <div id="searchResults" class="mail-results">
+                    <div class="empty-state">
+                        <span style="font-size: 50px;">📭</span>
+                        <p>Your inbox is empty.</p>
+                    </div>
+                </div>
+            
+
+
+
+            </div>
+        </div>
     </div>
 
     <div id="overlay" class="overlay hidden">
@@ -98,6 +172,20 @@
             </div>
         </div>
     </div>
+<!-- overlay -->
+<div id="mailOverlay" class="overlay hidden">
+    <div class="popup mail-view">
+        <button id="closeMailView" class="close-btn">&times;</button>
+        <h2 id="mailSubject" class="mail-subject">Mail Subject Here</h2>
+        <div id="mailMeta" class="mail-meta">
+            <span>From: sender@example.com</span> | 
+            <span>Date: 2025-07-18</span>
+        </div>
+        <div id="mailContent" class="mail-content">
+            <p>This is the detailed content of the email message...</p>
+        </div>
+    </div>
+</div>
 
 
 
@@ -106,8 +194,7 @@
     const overlay = document.getElementById('overlay');
     const closeBtn = document.getElementById('closePopup');
     const clearBtn = document.getElementById('clearForm');
-
-
+    
         advBtn.addEventListener('click', () => {
             overlay.classList.remove('hidden');
             document.body.classList.add('blurred');
@@ -129,11 +216,98 @@
         }
     </script>
 
+    <script>
+        // Handle mail double click
+        const mailItems = document.querySelectorAll('.mail-item');
+        const mailOverlay = document.getElementById('mailOverlay');
+        const mailSubject = document.getElementById('mailSubject');
+        const mailContent = document.getElementById('mailContent');
+        const closeMailBtn = document.getElementById('closeMailView');
 
+        mailItems.forEach(item => {
+            item.addEventListener('dblclick', () => {
+                mailSubject.innerText = item.innerText;  // Use actual data when you have it
+                mailContent.innerText = "This is a detailed view of the mail content.";
+                mailOverlay.classList.remove('hidden');
+            });
+        });
 
+        closeMailBtn.addEventListener('click', () => {
+            mailOverlay.classList.add('hidden');
+        });
 
+        // Close on outside click
+        mailOverlay.addEventListener('click', (e) => {
+            if (e.target === mailOverlay) {
+                mailOverlay.classList.add('hidden');
+            }
+        });
+    </script>
 
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.querySelector('.sidebar');
 
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('expanded');
+        });
+
+        // Auto-collapse on mouse leave
+        sidebar.addEventListener('mouseleave', () => {
+            if (sidebar.classList.contains('expanded')) {
+                sidebar.classList.remove('expanded');
+            }
+        });
+    </script>
+    
+<script>
+    function loadContent(section) {
+        const searchResults = document.getElementById('searchResults');
+        const panelContent = document.getElementById('panelContent');
+        const panelInnerContent = document.getElementById('panelInnerContent');
+
+        // Hide search results and show panel
+        searchResults.style.display = 'none';
+        panelContent.style.display = 'block';
+
+        let contentHTML = '';
+
+        switch(section) {
+            case 'Inbox':
+                contentHTML = '<h2>Inbox</h2><p>Here are your inbox emails...</p>';
+                break;
+            case 'Sent':
+                contentHTML = '<h2>Sent</h2><p>Here are your sent emails...</p>';
+                break;
+            case 'Drafts':
+                contentHTML = '<h2>Drafts</h2><p>Here are your draft emails...</p>';
+                break;
+            case 'Spam':
+                contentHTML = '<h2>Spam</h2><p>Here are your spam emails...</p>';
+                break;
+            case 'Trash':
+                contentHTML = '<h2>Trash</h2><p>Here are your deleted emails...</p>';
+                break;
+            case 'Settings':
+                contentHTML = '<h2>Settings</h2><p>Adjust your preferences here.</p>';
+                break;
+            default:
+                contentHTML = '<h2>Welcome</h2><p>Select a section from the sidebar.</p>';
+        }
+
+        // Update inner content without refreshing container
+        panelInnerContent.innerHTML = contentHTML;
+    }
+
+    function closeContent() {
+        const searchResults = document.getElementById('searchResults');
+        const panelContent = document.getElementById('panelContent');
+
+        // Show search results and hide panel
+        searchResults.style.display = 'block';
+        panelContent.style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
