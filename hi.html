@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Search Overlay</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .search-overlay {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ddd;
+    padding: 16px;
+    width: 600px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 4px;
+  }
+
+  .search-overlay .row {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .search-overlay .row label {
+    width: 100px;
+    line-height: 28px;
+    font-size: 14px;
+  }
+
+  .search-overlay .row input,
+  .search-overlay .row select {
+    flex: 1;
+    padding: 4px 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .search-overlay .row select {
+    width: auto;
+  }
+
+  .search-overlay .row .size-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .search-overlay .options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .search-overlay .options-row label {
+    font-size: 14px;
+  }
+
+  .search-overlay .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  .search-overlay button {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .search-overlay button:disabled {
+    background: #e0e0e0;
+    color: #888;
+    cursor: not-allowed;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .search-overlay {
+      width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="search-overlay">
+  <div class="row">
+    <label for="from">From</label>
+    <input type="text" id="from">
+  </div>
+  <div class="row">
+    <label for="to">To</label>
+    <input type="text" id="to">
+  </div>
+  <div class="row">
+    <label for="subject">Subject</label>
+    <input type="text" id="subject">
+  </div>
+  <div class="row">
+    <label for="has">Has the words</label>
+    <input type="text" id="has">
+  </div>
+  <div class="row">
+    <label for="doesnt">Doesn’t have</label>
+    <input type="text" id="doesnt">
+  </div>
+  <div class="row">
+    <label>Size</label>
+    <div class="size-group">
+      <select>
+        <option>greater than</option>
+        <option>less than</option>
+      </select>
+      <input type="number" style="width:80px;">
+      <select>
+        <option>MB</option>
+        <option>KB</option>
+        <option>Bytes</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <label>Date within</label>
+    <div class="size-group">
+      <select>
+        <option>1 day</option>
+        <option>3 days</option>
+        <option>1 week</option>
+        <option>1 month</option>
+      </select>
+      <input type="date">
+    </div>
+  </div>
+  <div class="row">
+    <label for="search">Search</label>
+    <select id="search">
+      <option>All Mail</option>
+      <option>Inbox</option>
+      <option>Sent</option>
+      <option>Drafts</option>
+      <option>Spam</option>
+    </select>
+  </div>
+
+  <div class="options-row">
+    <label><input type="checkbox"> Has attachment</label>
+    <label><input type="checkbox"> Don't include chats</label>
+  </div>
+
+  <div class="buttons">
+    <button disabled>Create filter</button>
+    <button>Search</button>
+  </div>
+</div>
+
+</body>
+</html>
